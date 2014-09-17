@@ -2,29 +2,25 @@
 
 #Remove files if they exist and store in backup folder
 if [ -f ~/.screenrc ]; then
-  mv -f ~/.screenrc $DOTFILES/backup/
+  rm -rf ~/.screenrc
 fi
 if [ -f ~/.gitconfig ]; then
-mv -f ~/.gitconfig $DOTFILES/backup/
+  rm -rf ~/.gitconfig
 fi
 if [ -f ~/.gemrc ]; then
-mv -f ~/.gemrc $DOTFILES/backup/
+  rm -rf ~/.gemrc
 fi
 if [ -f ~/.tmux.conf ]; then
-mv -f ~/.tmux.conf $DOTFILES/backup/
+  rm -rf ~/.tmux.conf
 fi
 if [ -f ~/.vimrc ]; then
-mv -f ~/.vimrc $DOTFILES/backup/
+  rm -rf ~/.vimrc
 fi
 if [ -d ~/.vim ]; then
-rm -rf $DOTFILES/backup/.vim/*
-  if [! -d $DOTFILES/backup/.vim ]; then
-    mkdir $DOTFILES/backup/.vim
-  fi
-  mv -f ~/.vim/* $DOTFILES/backup/.vim/
+  rm -rf ~/.vim/ 
 fi
 if [ -f ~/.zshrc ]; then
-mv -f ~/.zshrc $DOTFILES/backup/
+  rm -rf ~/.zshrc
 fi
 
 DOTFILES="$( cd "$(dirname "$0")" ; pwd -P )"
