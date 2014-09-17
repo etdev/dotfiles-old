@@ -19,11 +19,10 @@ fi
 [ ! -L ~/.vim/colors ] && ln -s $DOTFILES/.vim/colors ~/.vim/colors
 if [ ! -d $HOME/.vim/bundle ]; then
   mkdir -p $HOME/.vim/bundle
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi
-if [ ! -d $HOME/.vim/bundle/neobundle.vim ]; then
-  git clone https://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
-fi
-vim +NeoBundleInstall +qall
+
+vim +BundleInstall +qall
 
 # zsh
 if [ ! -d $DOTFILES/.zsh/src/zsh-completions ]; then
@@ -35,3 +34,4 @@ fi
 if [ ! -L ~/.zshrc ]; then
     ln -s $DOTFILES/.zshrc ~/.zshrc
 fi
+
