@@ -1,4 +1,29 @@
 #!/bin/sh
+
+#Remove files if they exist and store in backup folder
+if [ -f ~/.screenrc ]; then
+  mv -f ~/.screenrc $DOTFILES/backup/
+fi
+if [ -f ~/.gitconfig ]; then
+mv -f ~/.gitconfig $DOTFILES/backup/
+fi
+if [ -f ~/.gemrc ]; then
+mv -f ~/.gemrc $DOTFILES/backup/
+fi
+if [ -f ~/.tmux.conf ]; then
+mv -f ~/.tmux.conf $DOTFILES/backup/
+fi
+if [ -f ~/.vimrc ]; then
+mv -f ~/.vimrc $DOTFILES/backup/
+fi
+if [ -d ~/.vim ]; then
+rm -rf $DOTFILES/backup/.vim/*
+mv -f ~/.vim/* $DOTFILES/backup/.vim/
+fi
+if [ -f ~/.zshrc ]; then
+mv -f ~/.zshrc $DOTFILES/backup/
+fi
+
 DOTFILES="$( cd "$(dirname "$0")" ; pwd -P )"
 
 [ ! -L ~/.screenrc   ] && ln -s $DOTFILES/.screenrc  ~/.screenrc
@@ -16,7 +41,7 @@ fi
 # vim
 [ ! -L ~/.vimrc      ] && ln -s $DOTFILES/.vimrc ~/.vimrc
 [ ! -L ~/.gvimrc     ] && ln -s $DOTFILES/.gvimrc ~/.gvimrc
-[ ! -L ~/.vim/colors ] && ln -s $DOTFILES/.vim/colors ~/.vim/colors
+
 if [ ! -d $HOME/.vim/bundle ]; then
   mkdir -p $HOME/.vim/bundle
   git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
