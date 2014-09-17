@@ -1,1 +1,3 @@
 .zsh/src
+/backup
+backup/**
