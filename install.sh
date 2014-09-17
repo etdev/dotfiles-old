@@ -18,7 +18,10 @@ mv -f ~/.vimrc $DOTFILES/backup/
 fi
 if [ -d ~/.vim ]; then
 rm -rf $DOTFILES/backup/.vim/*
-mv -f ~/.vim/* $DOTFILES/backup/.vim/
+  if [! -d $DOTFILES/backup/.vim ]; then
+    mkdir $DOTFILES/backup/.vim
+  fi
+  mv -f ~/.vim/* $DOTFILES/backup/.vim/
 fi
 if [ -f ~/.zshrc ]; then
 mv -f ~/.zshrc $DOTFILES/backup/
