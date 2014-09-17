@@ -1,3 +1,4 @@
+ZSH_THEME="awesomepanda"
 ZSHRC="$(readlink $HOME/.zshrc)"
 export DOTFILES="$( cd "$(dirname "$ZSHRC")"; pwd -P)"
 
