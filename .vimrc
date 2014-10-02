@@ -52,7 +52,7 @@ filetype off                  " required
 "------------------------------
 """ basic
 "------------------------------
-let mapleader = ";"
+let mapleader = ","
 
 set list
 set number
