@@ -164,3 +164,7 @@ let g:hybrid_use_iTerm_colors = 1
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 au BufRead *.html set filetype=htmlm4
 let g:yankring_history_dir = '~/.vim/'
+
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': ['foo', 'bar'],
+                           \ 'passive_filetypes': ['java'] }
