@@ -88,16 +88,6 @@ map  <C-t><C-p> :tabp<CR>
 set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-"highlight CursorLine ctermbg=black guibg=black
-"highlight CursorColumn ctermbg=black guibg=black
-"augroup cch
-"  autocmd! cch
-"  autocmd WinLeave * set nocursorcolumn nocursorline
-"  autocmd WinEnter,BufRead * set cursorcolumn cursorline
-  "autocmd WinLeave * set nocursorline
-  "autocmd WinEnter,BufRead * set cursorline
-"augroup END
-
 "------------------------------
 """ statusline
 "------------------------------
@@ -118,18 +108,6 @@ augroup filetypedetect
     autocmd! BufNewFile,BufRead *.py  setfiletype python
     autocmd! BufNewFile,BufRead *.txt setfiletype text
 augroup END
-
-
-"------------------------------
-""" PLUGINS
-"------------------------------
-"source ~/dotfiles/.vim/vundle.vimrc
-" source ~/dotfiles/.vim/neocomplcache.vimrc
-"source ~/dotfiles/.vim/nerdtree.vimrc
-" source ~/dotfiles/.vim/nerdcommenter.vimrc
-" source ~/dotfiles/.vim/unite.vimrc
-" source ~/dotfiles/.vim/python-virtualenv.vimrc
-"source ~/dotfiles/.vim/yankring.vimrc
 
 if !exists('loaded_matchit')
   runtime macros/matchit.vim

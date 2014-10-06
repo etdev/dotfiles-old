@@ -38,5 +38,12 @@
 [branch "master"]
     merge = refs/heads/master
     remote = origin
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = /usr/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
 [merge]
-    tool = origin
+	tool = diffmerge
+[mergetool "diffmerge"]
+	trustExitCode = true
+	cmd = /usr/bin/diffmerge --merge --result=\"$MERGED\"\n        \"$LOCAL\" \"$BASE\" \"$REMOTE\"

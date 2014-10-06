@@ -16,3 +16,6 @@ if [ -z $0 ]; then
   export GOROOT="$(cd "$(dirname "$(which go)" )"/.. ; pwd )"
   export GOPATH=$HOME/dev
 fi
+
+set -o vi
+bindkey -v
