@@ -1,3 +1,4 @@
+set encoding=utf-8
 set nocompatible              " be iMproved, required
 filetype off                  " required
 colorscheme peachpuff
@@ -31,19 +32,13 @@ Bundle 'nvie/vim-flake8'
 Bundle 'scrooloose/syntastic'
 Bundle 'mustache/vim-mustache-handlebars'
 Bundle 'slim-template/vim-slim.git'
+Bundle 'kien/ctrlp.vim'
+Bundle 'Shougo/unite.vim'
+Bundle 'thoughtbot/vim-rspec'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
@@ -58,21 +53,13 @@ set list
 set number
 set nopaste
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set backspace=indent,eol,start
 map <F4> :set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%<CR><Esc>
 map <F5> :set listchars=""<CR><ESC>
 map <F6> :TlistToggle<CR>
 
 " remove spaces at line end
 autocmd BufWritePre * :%s/\s\+$//ge
-
-"------------------------------
-""" indent
-"------------------------------
-"set noautoindent
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set showtabline=2
 
 "------------------------------
 """ tab
@@ -136,6 +123,8 @@ set autoindent
 set nostartofline
 set confirm
 set visualbell
+set copyindent
+set showmatch
 set t_vb=
 set mouse=a
 "set cmdheight=2
@@ -145,14 +134,17 @@ nnoremap <C-L> :nohl<CR><C-L>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " NERDTree
-autocmd VimEnter * NERDTree
-autocmd BUFEnter * NERDTreeMirror
-autocmd VimEnter * wincmd p
-let NERDTreeWinSize = 26
+"autocmd VimEnter * NERDTree
+"autocmd BUFEnter * NERDTreeMirror
+"autocmd VimEnter * wincmd p
+"let NERDTreeWinSize = 28
+
+"Turn off top/bottom bars
 
 set clipboard=unnamed
 set tabstop=2
 set shiftwidth=2
+set shiftround
 set softtabstop=2
 set expandtab
 set backspace=2
@@ -164,7 +156,50 @@ let g:hybrid_use_iTerm_colors = 1
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 au BufRead *.html set filetype=htmlm4
 let g:yankring_history_dir = '~/.vim/'
+set history=1000
+set undolevels=1000
+set hidden
+set title
+set noerrorbells
+set nobackup
+set noswapfile
+
+"Moving between on-screen lines within a long, wrapped line
+nnoremap j gj
+nnoremap k gk
+
+"For snipmate:
+:filetype plugin on
+
+"Disable the arrow keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
 
 let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': ['foo', 'bar'],
+                           \ 'active_filetypes': ['ruby', 'javascript', 'html', 'css'],
                            \ 'passive_filetypes': ['java'] }
+"improve redrawing
+set ttyfast
+
+"Get rid of bottom status line
+set laststatus=0
+set noshowmode
+
+"Turn on RainbowParentheses
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = "!bundle exec rspec {spec}"
+let g:rspec_runner = "os_x_iterm"
+
+"Ctrlp search
+set wildignore+=*/tmp/*,*.so,*.swp,*.swo,*/vendor/bundle/*,*.zip     " Linux/MacOSX
