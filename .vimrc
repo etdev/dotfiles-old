@@ -134,10 +134,10 @@ nnoremap <C-L> :nohl<CR><C-L>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " NERDTree
-"autocmd VimEnter * NERDTree
-"autocmd BUFEnter * NERDTreeMirror
-"autocmd VimEnter * wincmd p
-"let NERDTreeWinSize = 28
+autocmd VimEnter * NERDTree
+autocmd BUFEnter * NERDTreeMirror
+autocmd VimEnter * wincmd p
+let NERDTreeWinSize = 15
 
 "Turn off top/bottom bars
 
@@ -203,3 +203,4 @@ let g:rspec_runner = "os_x_iterm"
 
 "Ctrlp search
 set wildignore+=*/tmp/*,*.so,*.swp,*.swo,*/vendor/bundle/*,*.zip     " Linux/MacOSX
+
