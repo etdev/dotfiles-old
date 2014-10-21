@@ -16,7 +16,15 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+Bundle 'tpope/vim-rails.git'
+Bundle 'tpope/vim-bundler.git'
 Bundle 'JulesWang/css.vim'
+"Snipmate
+Bundle 'tomtom/tlib_vim.git'
+Bundle 'MarcWeber/vim-addon-mw-utils.git'
+Bundle 'garbas/vim-snipmate.git'
+Bundle 'honza/vim-snippets.git'
+"
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
@@ -24,6 +32,7 @@ Bundle 'rainbow_parentheses.vim'
 Bundle 'YankRing.vim'
 Bundle 'taglist.vim'
 Bundle 'taglist-plus'
+
 Bundle 'AndrewRadev/switch.vim'
 Bundle 'endwise.vim'
 Bundle 'mileszs/ack.vim'
