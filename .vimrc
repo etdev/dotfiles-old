@@ -1,7 +1,7 @@
 set encoding=utf-8
 set nocompatible              " be iMproved, required
 filetype off                  " required
-colorscheme peachpuff
+colorscheme default
 
 set t_Co=256
 
@@ -213,3 +213,22 @@ let g:rspec_runner = "os_x_iterm"
 "Ctrlp search
 set wildignore+=*/tmp/*,*.so,*.swp,*.swo,*/vendor/bundle/*,*.zip     " Linux/MacOSX
 
+"NERDTree Toggle
+nnoremap <C-e> :NERDTreeToggle<CR>
+
+"Toggle between relative and absolute line numbers
+function! RelativeToggle()
+  if(&relativenumber == 1)
+    set number
+  elseif(&number == 1)
+    set nu!
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <C-l> :call RelativeToggle()<CR>
+
+"Highlight current row/column
+:hi CursorLine   cterm=NONE ctermbg=black guibg=black
+:hi CursorColumn cterm=NONE ctermbg=black guibg=black
+:set cursorline! cursorcolumn!
