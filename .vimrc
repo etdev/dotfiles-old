@@ -58,10 +58,10 @@ filetype off                  " required
 "------------------------------
 let mapleader = ","
 
-set list
+"set list
 set number
 set nopaste
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+"set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set backspace=indent,eol,start
 map <F4> :set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%<CR><Esc>
 map <F5> :set listchars=""<CR><ESC>
@@ -135,7 +135,7 @@ set visualbell
 set copyindent
 set showmatch
 set t_vb=
-set mouse=a
+"set mouse=a
 "set cmdheight=2
 set notimeout ttimeout ttimeoutlen=200
 nnoremap <C-L> :nohl<CR><C-L>
@@ -218,17 +218,21 @@ nnoremap <C-e> :NERDTreeToggle<CR>
 
 "Toggle between relative and absolute line numbers
 function! RelativeToggle()
-  if(&relativenumber == 1)
-    set number
-  elseif(&number == 1)
+  if(&number == 1)
     set nu!
   else
-    set relativenumber
+    set number
   endif
 endfunc
+
 nnoremap <C-l> :call RelativeToggle()<CR>
 
 "Highlight current row/column
 :hi CursorLine   cterm=NONE ctermbg=black guibg=black
 :hi CursorColumn cterm=NONE ctermbg=black guibg=black
 :set cursorline! cursorcolumn!
+
+"Ctags
+set tags=./tags;
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
