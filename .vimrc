@@ -102,6 +102,8 @@ syntax enable
 augroup filetypedetect
     " Detect .txt as 'text'
     autocmd! BufNewFile,BufRead *.py  setfiletype python
+    autocmd! BufNewFile,BufRead *.html.erb  setfiletype html
+    autocmd! BufNewFile,BufRead *.html  setfiletype html
     autocmd! BufNewFile,BufRead *.txt setfiletype text
 augroup END
 
@@ -135,7 +137,7 @@ set visualbell
 set copyindent
 set showmatch
 set t_vb=
-"set mouse=a
+set mouse=a
 "set cmdheight=2
 set notimeout ttimeout ttimeoutlen=200
 nnoremap <C-L> :nohl<CR><C-L>

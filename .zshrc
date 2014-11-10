@@ -23,3 +23,14 @@ bindkey "^W" backward-kill-word    # vi-backward-kill-word
 bindkey "^H" backward-delete-char  # vi-backward-delete-char
 bindkey "^U" kill-line             # vi-kill-line
 bindkey "^?" backward-delete-char  # vi-backward-delete-char
+
+# $1 = type; 0 - both, 1 - tab, 2 - title
+# rest = text
+setTerminalText () {
+    # echo works in bash & zsh
+    local mode=$1 ; shift
+    echo -ne "\033]$mode;$@\007"
+}
+stt_both  () { setTerminalText 0 $@; }
+stt_tab   () { setTerminalText 1 $@; }
+stt_title () { setTerminalText 2 $@; }
