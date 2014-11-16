@@ -16,9 +16,6 @@ fi
 if [ -f ~/.vimrc ]; then
   rm -rf ~/.vimrc
 fi
-if [ -d ~/.vim ]; then
-  rm -rf ~/.vim/ 
-fi
 if [ -f ~/.zshrc ]; then
   rm -rf ~/.zshrc
 fi
