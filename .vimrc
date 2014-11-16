@@ -148,7 +148,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 autocmd VimEnter * NERDTree
 autocmd BUFEnter * NERDTreeMirror
 autocmd VimEnter * wincmd p
-let NERDTreeWinSize = 15
+let NERDTreeWinSize = 18
 
 "Turn off top/bottom bars
 
