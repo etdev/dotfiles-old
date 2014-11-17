@@ -28,6 +28,7 @@
     # log
     l  = log --pretty=format:\"%h %ar\t(%an)\t: %s\" --date=short -20
     lg  = log --pretty=format:\"%h %ar\t(%an)\t: %s\" --date=short -20 --graph
+	d = difftool
 #    wc  = watchanged
 #    ls  = log --stat
 #    lp  = log -p
@@ -39,7 +40,7 @@
     merge = refs/heads/master
     remote = origin
 [diff]
-	tool = diffmerge
+	tool = vimdiff
 [difftool "diffmerge"]
 	cmd = /usr/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
 [merge]
@@ -47,3 +48,5 @@
 [mergetool "diffmerge"]
 	trustExitCode = true
 	cmd = /usr/bin/diffmerge --merge --result=\"$MERGED\"\n        \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[difftool]
+	prompt = false
