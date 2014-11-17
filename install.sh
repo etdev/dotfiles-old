@@ -56,3 +56,6 @@ if [ ! -L ~/.zshrc ]; then
     ln -s $DOTFILES/.zshrc ~/.zshrc
 fi
 
+# tmux (refresh config file)
+tmux source-file ~/.tmux.conf
+

@@ -39,11 +39,11 @@
     merge = refs/heads/master
     remote = origin
 [diff]
-	tool = diffmerge
+	tool = vimdiff
 [difftool "diffmerge"]
 	cmd = /usr/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
 [merge]
-	tool = diffmerge
+	tool = vimdiff
 [mergetool "diffmerge"]
 	trustExitCode = true
 	cmd = /usr/bin/diffmerge --merge --result=\"$MERGED\"\n        \"$LOCAL\" \"$BASE\" \"$REMOTE\"
