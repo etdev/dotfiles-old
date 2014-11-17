@@ -28,7 +28,7 @@ Bundle 'honza/vim-snippets.git'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'rainbow_parentheses.vim'
+Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'YankRing.vim'
 Bundle 'taglist.vim'
 Bundle 'taglist-plus'
@@ -58,10 +58,10 @@ filetype off                  " required
 "------------------------------
 let mapleader = ","
 
-set list
+"set list
 set number
 set nopaste
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+"set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set backspace=indent,eol,start
 map <F4> :set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%<CR><Esc>
 map <F5> :set listchars=""<CR><ESC>
@@ -102,6 +102,8 @@ syntax enable
 augroup filetypedetect
     " Detect .txt as 'text'
     autocmd! BufNewFile,BufRead *.py  setfiletype python
+    autocmd! BufNewFile,BufRead *.html.erb  setfiletype html
+    autocmd! BufNewFile,BufRead *.html  setfiletype html
     autocmd! BufNewFile,BufRead *.txt setfiletype text
 augroup END
 
@@ -146,7 +148,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 autocmd VimEnter * NERDTree
 autocmd BUFEnter * NERDTreeMirror
 autocmd VimEnter * wincmd p
-let NERDTreeWinSize = 15
+let NERDTreeWinSize = 18
 
 "Turn off top/bottom bars
 
@@ -196,11 +198,25 @@ set ttyfast
 set laststatus=0
 set noshowmode
 
-"Turn on RainbowParentheses
+"RainbowParentheses
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
 
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -218,17 +234,21 @@ nnoremap <C-e> :NERDTreeToggle<CR>
 
 "Toggle between relative and absolute line numbers
 function! RelativeToggle()
-  if(&relativenumber == 1)
-    set number
-  elseif(&number == 1)
+  if(&number == 1)
     set nu!
   else
-    set relativenumber
+    set number
   endif
 endfunc
+
 nnoremap <C-l> :call RelativeToggle()<CR>
 
 "Highlight current row/column
 :hi CursorLine   cterm=NONE ctermbg=black guibg=black
 :hi CursorColumn cterm=NONE ctermbg=black guibg=black
 :set cursorline! cursorcolumn!
+
+"Ctags
+set tags=./tags;
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
