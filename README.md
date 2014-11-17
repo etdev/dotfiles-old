@@ -11,7 +11,7 @@ for...
 
 ```bash
 cd $HOME
-git clone git@github.com:ericturnerdev/dotfiles.git
+git clone git@github.com:etdev/dotfiles.git
 cd dotfiles
 ./install.sh
 ```
