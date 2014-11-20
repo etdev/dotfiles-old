@@ -16,6 +16,9 @@ fi
 if [ -f ~/.vimrc ]; then
   rm -rf ~/.vimrc
 fi
+if [ -f ~/.screenrc ]; then
+  rm -rf ~/.vimrc.bundles
+fi
 if [ -f ~/.zshrc ]; then
   rm -rf ~/.zshrc
 fi
@@ -36,6 +39,7 @@ fi
 
 # vim
 [ ! -L ~/.vimrc      ] && ln -s $DOTFILES/.vimrc ~/.vimrc
+[ ! -L ~/.vimrc.bundles      ] && ln -s $DOTFILES/.vimrc.bundles ~/.vimrc.bundles
 [ ! -L ~/.gvimrc     ] && ln -s $DOTFILES/.gvimrc ~/.gvimrc
 
 if [ ! -d $HOME/.vim/bundle ]; then
@@ -57,5 +61,6 @@ if [ ! -L ~/.zshrc ]; then
 fi
 
 # tmux (refresh config file)
+tmux
 tmux source-file ~/.tmux.conf
 
