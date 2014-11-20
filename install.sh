@@ -37,6 +37,11 @@ if [ ! -d $DOTFILES/.tmux/src/tmux-powerline ]; then
   git clone https://github.com/erikw/tmux-powerline.git $DOTFILES/.tmux/src/tmux-powerline
 fi
 
+#(refresh config file)
+tmux new -s test
+tmux source-file ~/.tmux.conf
+exit
+
 # vim
 [ ! -L ~/.vimrc      ] && ln -s $DOTFILES/.vimrc ~/.vimrc
 [ ! -L ~/.vimrc.bundles      ] && ln -s $DOTFILES/.vimrc.bundles ~/.vimrc.bundles
@@ -60,7 +65,4 @@ if [ ! -L ~/.zshrc ]; then
     ln -s $DOTFILES/.zshrc ~/.zshrc
 fi
 
-# tmux (refresh config file)
-tmux
-tmux source-file ~/.tmux.conf
 
