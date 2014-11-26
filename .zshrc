@@ -19,8 +19,14 @@ if [ -z $0 ]; then
   export GOPATH=$HOME/dev
 fi
 
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
 set -o vi
 bindkey -v
+bindkey '^R' history-incremental-search-backward
+
 bindkey "^W" backward-kill-word    # vi-backward-kill-word
 bindkey "^H" backward-delete-char  # vi-backward-delete-char
 bindkey "^U" kill-line             # vi-kill-line
@@ -36,3 +42,9 @@ setTerminalText () {
 stt_both  () { setTerminalText 0 $@; }
 stt_tab   () { setTerminalText 1 $@; }
 stt_title () { setTerminalText 2 $@; }
+
+# Automatically run ls after cd
+function chpwd() {
+    emulate -L zsh
+        ls -a
+      }

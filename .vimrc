@@ -195,7 +195,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 set ttyfast
 
 "Get rid of bottom status line
-set laststatus=0
+"set laststatus=0
 set noshowmode
 
 "RainbowParentheses
@@ -252,3 +252,6 @@ nnoremap <C-l> :call RelativeToggle()<CR>
 set tags=./tags;
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+"By default don't show line numbers
+set nonumber
