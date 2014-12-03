@@ -5,9 +5,53 @@ colorscheme default
 
 set t_Co=256
 
-if filereadable(expand("~/.vimrc.bundles"))
-    source ~/.vimrc.bundles
-endif
+"VUNDLE
+" set the runtime path to include Vundle and initialize
+"set rtp+=~/.vim/bundle/Vundle.vim
+"set rtp+=$DOTFILES/.vim/vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Bundle 'tpope/vim-rails.git'
+Bundle 'tpope/vim-bundler.git'
+Bundle 'JulesWang/css.vim'
+"Snipmate
+Bundle 'tomtom/tlib_vim.git'
+Bundle 'MarcWeber/vim-addon-mw-utils.git'
+Bundle 'garbas/vim-snipmate.git'
+Bundle 'honza/vim-snippets.git'
+"
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'YankRing.vim'
+Bundle 'taglist.vim'
+Bundle 'taglist-plus'
+
+Bundle 'AndrewRadev/switch.vim'
+Bundle 'endwise.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'nvie/vim-flake8'
+Bundle 'scrooloose/syntastic'
+Bundle 'mustache/vim-mustache-handlebars'
+Bundle 'slim-template/vim-slim.git'
+Bundle 'kien/ctrlp.vim'
+Bundle 'Shougo/unite.vim'
+Bundle 'thoughtbot/vim-rspec'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
 "------------------------------
 """ basic
@@ -16,7 +60,6 @@ let mapleader = ","
 
 "set list
 set number
-set numberwidth=5
 set nopaste
 "set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set backspace=indent,eol,start
@@ -124,8 +167,8 @@ let g:hybrid_use_iTerm_colors = 1
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 au BufRead *.html set filetype=htmlm4
 let g:yankring_history_dir = '~/.vim/'
-set history=50
-set nowritebackup
+set history=1000
+set undolevels=1000
 set hidden
 set title
 set noerrorbells
@@ -152,7 +195,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
 set ttyfast
 
 "Get rid of bottom status line
-set laststatus=0
+"set laststatus=0
 set noshowmode
 
 "RainbowParentheses
@@ -210,71 +253,5 @@ set tags=./tags;
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
-"Added from thoughtbot:
-set showcmd " display incomplete commands
-set incsearch " do incremental searching
-set autowrite " automatically write before running commands
-
-augroup vimrcEx
-  autocmd!
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-
-  " Enable spellchecking for Markdown
-  autocmd FileType markdown setlocal spell
-
-  " Automatically wrap at 80 characters for Markdown
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
-
-  " Automatically wrap at 72 characters and spell check git commit messages
-  autocmd FileType gitcommit setlocal textwidth=72
-  autocmd FileType gitcommit setlocal spell
-
-  " Allow stylesheets to autocomplete hyphenated words
-  autocmd FileType css,scss,sass setlocal iskeyword+=-
-augroup END
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-" Index ctags from any project, including those outside Rails
-map <Leader>ct :!ctags -R .<CR>
-
-" Get off my lawn
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
-" Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
-" Always use vertical diffs
-set diffopt+=vertical
-
+"By default don't show line numbers
+set nonumber
