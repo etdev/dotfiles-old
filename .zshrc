@@ -48,3 +48,6 @@ function chpwd() {
     emulate -L zsh
         ls -a
       }
+
+# Curl benchmarking function
+curl-test(){ curl --silent -i $1 | grep X-Runtime; }
