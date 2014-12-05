@@ -46,7 +46,7 @@ stt_title () { setTerminalText 2 $@; }
 # Automatically run ls after cd
 function chpwd() {
     emulate -L zsh
-        ls -a
+        ls
       }
 
 # Curl benchmarking function
