@@ -38,9 +38,9 @@ if [ ! -d $DOTFILES/.tmux/src/tmux-powerline ]; then
 fi
 
 #(refresh config file)
-tmux new -s test
-tmux source-file ~/.tmux.conf
-exit
+#tmux new -s test
+#tmux source-file ~/.tmux.conf
+#exit
 
 # vim
 [ ! -L ~/.vimrc      ] && ln -s $DOTFILES/.vimrc ~/.vimrc
