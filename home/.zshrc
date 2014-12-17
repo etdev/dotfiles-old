@@ -22,3 +22,6 @@ export AKKA_HOME=$DEV_HOME/local/akka-microkernel-1.1
 # Android
 export ANDROID_HOME=$DEV_HOME/adt-bundle-mac-x86_64/sdk/
 PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
+
+#Fish shell history search
+source zsh-history-substring-search.zsh

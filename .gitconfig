@@ -50,3 +50,7 @@
 	cmd = /usr/bin/diffmerge --merge --result=\"$MERGED\"\n        \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 [difftool]
 	prompt = false
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
