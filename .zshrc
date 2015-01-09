@@ -1,6 +1,7 @@
 ZSH_THEME="awesomepanda"
 ZSHRC="$(readlink $HOME/.zshrc)"
 export DOTFILES="$( cd "$(dirname "$ZSHRC")"; pwd -P)"
+export LANG=en_US.utf8
 
 fpath=($DOTFILES/.zsh/src/zsh-completions/src $fpath)
 
