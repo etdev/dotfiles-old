@@ -1,11 +1,13 @@
 ZSH_THEME="awesomepanda"
 ZSHRC="$(readlink $HOME/.zshrc)"
 export DOTFILES="$( cd "$(dirname "$ZSHRC")"; pwd -P)"
+export LANG=en_US.utf8
 
 fpath=($DOTFILES/.zsh/src/zsh-completions/src $fpath)
 
 source $DOTFILES/.zsh/basic.zshrc
 source $DOTFILES/.zsh/history.zshrc
+source $DOTFILES/.aliases
 
 if [ -f $DOTFILES/.zsh/oh-my-zsh.zshrc ]; then
   source $DOTFILES/.zsh/oh-my-zsh.zshrc
@@ -50,4 +52,13 @@ function chpwd() {
       }
 
 # Curl benchmarking function
-curl-test(){ curl --silent -i $1 | grep X-Runtime; }
+# e.g. curl-test 10 google.com
+curl-test(){
+  i=0
+  while [ "$i" -lt $1 ]
+  do
+    curl --silent -i $2 | grep X-Runtime;
+    i=`expr $i + 1`
+  done
+}
+
