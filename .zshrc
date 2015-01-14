@@ -1,7 +1,10 @@
 ZSH_THEME="awesomepanda"
 ZSHRC="$(readlink $HOME/.zshrc)"
 export DOTFILES="$( cd "$(dirname "$ZSHRC")"; pwd -P)"
-export LANG=en_US.utf8
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+unset LC_ALL
+
 
 fpath=($DOTFILES/.zsh/src/zsh-completions/src $fpath)
 
@@ -62,3 +65,5 @@ curl-test(){
   done
 }
 
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

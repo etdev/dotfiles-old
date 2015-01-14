@@ -1,18 +1,12 @@
 set encoding=utf-8
 set nocompatible              " be iMproved, required
 filetype off                  " required
-colorscheme default
 
 set t_Co=256
 
 "VUNDLE
-" set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/Vundle.vim
-"set rtp+=$DOTFILES/.vim/vundle.vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
@@ -26,8 +20,6 @@ Bundle 'garbas/vim-snipmate.git'
 Bundle 'honza/vim-snippets.git'
 "
 Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'YankRing.vim'
 Bundle 'taglist.vim'
@@ -60,6 +52,8 @@ let mapleader = ","
 
 "set list
 set number
+set numberwidth=5
+
 set nopaste
 "set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set backspace=indent,eol,start
@@ -142,14 +136,6 @@ set mouse=a
 set notimeout ttimeout ttimeoutlen=200
 nnoremap <C-L> :nohl<CR><C-L>
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" NERDTree
-autocmd VimEnter * NERDTree
-autocmd BUFEnter * NERDTreeMirror
-autocmd VimEnter * wincmd p
-let NERDTreeWinSize = 18
-
 "Turn off top/bottom bars
 
 set clipboard=unnamed
@@ -227,21 +213,7 @@ let g:rspec_command = "!bundle exec rspec {spec}"
 let g:rspec_runner = "os_x_iterm"
 
 "Ctrlp search
-set wildignore+=*/tmp/*,*.so,*.swp,*.swo,*/vendor/bundle/*,*.zip     " Linux/MacOSX
-
-"NERDTree Toggle
-nnoremap <C-e> :NERDTreeToggle<CR>
-
-"Toggle between relative and absolute line numbers
-function! RelativeToggle()
-  if(&number == 1)
-    set nu!
-  else
-    set number
-  endif
-endfunc
-
-nnoremap <C-l> :call RelativeToggle()<CR>
+set wildignore+=*/tmp/*,*.so,*.swp,*.swo,*/vendor/bundle/*,*.zip,*.bak    " Linux/MacOSX
 
 "Highlight current row/column
 :hi CursorLine   cterm=NONE ctermbg=black guibg=black
@@ -255,3 +227,60 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 "By default don't show line numbers
 set nonumber
+
+
+" --- From Thoughtbot --- "
+augroup vimrcEx
+  autocmd!
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it for commit messages, when the position is invalid, or when
+  " inside an event handler (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  " Set syntax highlighting for specific file types
+  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+  " Enable spellchecking for Markdown
+  autocmd FileType markdown setlocal spell
+
+  " Automatically wrap at 80 characters for Markdown
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+
+  " Automatically wrap at 72 characters and spell check git commit messages
+  autocmd FileType gitcommit setlocal textwidth=72
+  autocmd FileType gitcommit setlocal spell
+
+  " Allow stylesheets to autocomplete hyphenated words
+  autocmd FileType css,scss,sass setlocal iskeyword+=-
+augroup END
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
+let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
+
+" Index ctags from any project, including those outside Rails
+map <Leader>ct :!ctags -R .<CR>
+
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
+
+" vim-rspec mappings
+nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>s :call RunNearestSpec()<CR>
+nnoremap <Leader>l :call RunLastSpec()<CR>
