@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#Remove files if they exist and store in backup folder
+#Remove files if they exist
 if [ -f ~/.screenrc ]; then
   rm -rf ~/.screenrc
 fi
@@ -18,9 +18,6 @@ if [ -f ~/.vimrc ]; then
 fi
 if [ -f ~/.screenrc ]; then
   rm -rf ~/.vimrc.bundles
-fi
-if [ -f ~/.zshrc ]; then
-  rm -rf ~/.zshrc
 fi
 
 DOTFILES="$( cd "$(dirname "$0")" ; pwd -P )"
@@ -53,16 +50,4 @@ if [ ! -d $HOME/.vim/bundle ]; then
 fi
 
 vim +BundleInstall +qall
-
-# zsh
-if [ ! -d $DOTFILES/.zsh/src/zsh-completions ]; then
-  git clone git://github.com/zsh-users/zsh-completions.git $DOTFILES/.zsh/src/zsh-completions
-fi
-if [ ! -d $DOTFILES/.zsh/src/oh-my-zsh ]; then
-    git clone git://github.com/robbyrussell/oh-my-zsh.git $DOTFILES/.zsh/src/oh-my-zsh
-fi
-if [ ! -L ~/.zshrc ]; then
-    ln -s $DOTFILES/.zshrc ~/.zshrc
-fi
-
 
